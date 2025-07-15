@@ -23,7 +23,7 @@ export default function HomePage({ darkMode, setDarkMode }) {
     <div className={darkMode ? "dark" : ""} >
       {
         // className="bg-white text-black dark:bg-[#121212] dark:text-white min-h-screen"
-        <div >
+        <div className="bg-white text-black dark:bg-[#121212] dark:text-white min-h-screen">
           {/* Navbar */}
           <header className="flex justify-between items-center px-8 py-6">
             {/* Logo */}
@@ -144,6 +144,8 @@ export default function HomePage({ darkMode, setDarkMode }) {
               <a href="#" className="hover:text-[#D8B4FE] transition">
                 Contact
               </a>
+
+              <Link to="/about-us" className="hover:text-[#D8B4FE]">About Us</Link>
 
               {/* Profile Dropdown */}
               <Menu as="div" className="relative">

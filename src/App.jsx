@@ -5,6 +5,7 @@ import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 import ForgotPassword from './pages/ForgotPassword.jsx';
 import SecondHome from './pages/SecondHome.jsx';
+import AboutUs from "./pages/AboutUs.jsx";
 
 function App() {
   const isLoggedIn = localStorage.getItem("loggedIn") === "true";
@@ -29,6 +30,7 @@ function App() {
           isLoggedIn ? <SecondHome darkMode={darkMode} setDarkMode={setDarkMode} /> : <Navigate to="/login" replace />
         }
       />
+      <Route path="/about-us" element={<AboutUs />} />
     </Routes>
     </div>
   );
