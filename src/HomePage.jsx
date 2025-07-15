@@ -20,7 +20,7 @@ export default function HomePage({ darkMode, setDarkMode }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className={darkMode ? "dark" : ""} >
+    <div className={darkMode ? "dark" : ""}>
       {
         // className="bg-white text-black dark:bg-[#121212] dark:text-white min-h-screen"
         <div className="bg-white text-black dark:bg-[#121212] dark:text-white min-h-screen">
@@ -92,10 +92,10 @@ export default function HomePage({ darkMode, setDarkMode }) {
                 Products
               </a>
 
-              {/* Solutions Dropdown */}
+              {/* Services Dropdown */}
               <Menu as="div" className="relative inline-block text-left">
                 <Menu.Button className="inline-flex justify-center items-center hover:text-[#D8B4FE] transition">
-                  Solutions
+                  Services
                   <ChevronDownIcon
                     className="ml-1 h-4 w-4 text-[#5A6F73] hover:text-[#D8B4FE]"
                     aria-hidden="true"
@@ -114,25 +114,31 @@ export default function HomePage({ darkMode, setDarkMode }) {
                   <Menu.Items className="absolute mt-2 w-56 origin-top-right rounded-md bg-[#1E1E1E] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
                     <div className="py-1">
                       {[
-                        "Cloud Integration",
-                        "Data Analytics",
-                        "AI Solutions",
-                        "Automation Tools",
-                        "Customer Support",
-                        "Security & Compliance",
+                        {
+                          name: "Cloud Integration",
+                          path: "/cloud-integration",
+                        },
+                        { name: "Data Analytics", path: "/data-analytics" },
+                        { name: "AI Solutions", path: "/ai-solutions" },
+                        { name: "Automation Tools", path: "/automation-tools" },
+                        { name: "Customer Support", path: "/customer-support" },
+                        {
+                          name: "Security & Compliance",
+                          path: "/security-compliance",
+                        },
                       ].map((item, index) => (
                         <Menu.Item key={index}>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                              to={item.path}
                               className={`block px-4 py-2 text-sm ${
                                 active
                                   ? "bg-[#2a2a2a] text-[#D8B4FE]"
                                   : "text-[#5A6F73]"
                               }`}
                             >
-                              {item}
-                            </a>
+                              {item.name}
+                            </Link>
                           )}
                         </Menu.Item>
                       ))}
@@ -145,7 +151,9 @@ export default function HomePage({ darkMode, setDarkMode }) {
                 Contact
               </a>
 
-              <Link to="/about-us" className="hover:text-[#D8B4FE]">About Us</Link>
+              <Link to="/about-us" className="hover:text-[#D8B4FE]">
+                About Us
+              </Link>
 
               {/* Profile Dropdown */}
               <Menu as="div" className="relative">

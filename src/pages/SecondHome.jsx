@@ -1,6 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+
+// InsightCard component with flip effect and consistent alignment
+function InsightCard({ icon, title, desc, more }) {
+  const [flipped, setFlipped] = useState(false);
+  return (
+    <div
+      style={{ perspective: '1000px' }}
+      data-aos="fade-up"
+    >
+      <div
+        className="relative w-full h-72 transition-transform duration-500"
+        style={{
+          transformStyle: 'preserve-3d',
+          transform: flipped ? 'rotateY(180deg)' : 'none',
+        }}
+      >
+        {/* Front Side */}
+        <div
+          className="absolute inset-0 bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg flex flex-col justify-between items-center transition-all duration-300 group hover:shadow-[0_0_30px_5px_#FFD600] hover:border-[#FFD600] cursor-pointer"
+          style={{ backfaceVisibility: 'hidden' }}
+          onClick={() => setFlipped(true)}
+        >
+          <div className="flex flex-col items-center w-full flex-1 justify-center">
+            <span className="text-3xl mb-4">{icon}</span>
+            <h3 className="text-2xl font-bold text-[#FFD600] mb-2 group-hover:text-[#FFD600] text-center">{title}</h3>
+            <p className="mb-4 text-center flex-1">{desc}</p>
+          </div>
+          <button className="text-[#FFD600] underline font-semibold mt-2 self-center">Read More</button>
+        </div>
+        {/* Back Side */}
+        <div
+          className="absolute inset-0 bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg flex flex-col justify-between items-center transition-all duration-300 cursor-pointer"
+          style={{ transform: 'rotateY(180deg)', backfaceVisibility: 'hidden' }}
+          onClick={() => setFlipped(false)}
+        >
+          <div className="flex flex-col items-center w-full flex-1 justify-center">
+            <h3 className="text-2xl font-bold text-[#FFD600] mb-4 text-center">{title} - Details</h3>
+            <p className="text-center text-[#FFD600] mb-4 flex-1">{more}</p>
+          </div>
+          <button className="text-[#FFD600] underline font-semibold self-center" onClick={e => { e.stopPropagation(); setFlipped(false); }}>Go Back</button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const SecondHome = () => {
   useEffect(() => {
@@ -10,108 +55,226 @@ const SecondHome = () => {
   return (
     <div className="bg-[#121212] text-white">
       {/* Home Intro */}
-      <section className="py-20 text-center">
-        <h1 className="text-4xl font-bold text-[#D8B4FE]">Welcome to Our Company</h1>
-        <p className="mt-4 max-w-2xl mx-auto text-[#5A6F73]">
-          We help businesses achieve remarkable growth with innovative solutions.
-        </p>
+      <section className="py-20 flex justify-center items-center">
+        <div data-aos="fade-up">
+          <h1 className="text-4xl font-bold text-[#fffffe] mb-4 group-hover:text-[#FFD600]">Welcome to Our Company</h1>
+          <p className="text-[#5A6F73] group-hover:text-[#FFD600]">
+            We help businesses achieve remarkable growth with innovative solutions.
+          </p>
+        </div>
       </section>
 
-      {/* Insights Reveal */}
+      {/* Insights Reveal - Updated Cards */}
       <section className="py-20 px-4">
-        <h2 className="text-3xl font-bold text-[#D8B4FE] text-center mb-10">Insights</h2>
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          <div className="bg-[#5A6F73] p-6 rounded shadow" data-aos="fade-up">
-            <h3 className="text-xl font-bold text-[#D8B4FE] mb-2">Market Trends</h3>
-            <p>Stay ahead with data-driven insights into evolving markets.</p>
-          </div>
-          <div className="bg-[#5A6F73] p-6 rounded shadow" data-aos="fade-up">
-            <h3 className="text-xl font-bold text-[#D8B4FE] mb-2">Customer Behavior</h3>
-            <p>Understand your customers and tailor your services effectively.</p>
-          </div>
-          <div className="bg-[#5A6F73] p-6 rounded shadow" data-aos="fade-up">
-            <h3 className="text-xl font-bold text-[#D8B4FE] mb-2">Growth Opportunities</h3>
-            <p>Unlock hidden growth potential for your business success.</p>
-          </div>
+        <h2 className="text-3xl font-bold text-[#fffffe] text-center mb-10">Insights</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {[
+            {
+              icon: '📊',
+              title: 'Market Trends',
+              desc: 'Stay ahead with data-driven insights into evolving markets.',
+              more: 'We analyze global and local market trends to help you make informed decisions and stay competitive.'
+            },
+            {
+              icon: '🧑‍💼',
+              title: 'Customer Behavior',
+              desc: 'Understand your customers and tailor your services effectively.',
+              more: 'Deep dive into customer analytics to optimize engagement and retention strategies.'
+            },
+            {
+              icon: '🚀',
+              title: 'Growth Opportunities',
+              desc: 'Unlock hidden growth potential for your business success.',
+              more: 'Identify new markets, products, and partnerships for sustainable growth.'
+            },
+            {
+              icon: '💡',
+              title: 'Innovation Insights',
+              desc: 'Discover the latest innovations in your industry.',
+              more: 'Stay updated with cutting-edge technologies and innovative business models.'
+            },
+            {
+              icon: '🔒',
+              title: 'Security Analysis',
+              desc: 'Protect your business with advanced security insights.',
+              more: 'Get recommendations on best practices and tools to safeguard your data.'
+            },
+            {
+              icon: '🌐',
+              title: 'Global Expansion',
+              desc: 'Expand your reach with global market insights.',
+              more: 'Learn about international opportunities and how to enter new markets.'
+            }
+          ].map((card, idx) => (
+            <InsightCard key={idx} icon={card.icon} title={card.title} desc={card.desc} more={card.more} />
+          ))}
         </div>
       </section>
 
       {/* Featured Clients */}
       <section className="py-20">
-        <h2 className="text-3xl font-bold text-[#D8B4FE] text-center mb-10">Featured Clients</h2>
-        <div className="flex justify-center gap-8 flex-wrap">
-          <div className="w-40 h-20 bg-[#D8B4FE] text-[#121212] flex items-center justify-center rounded" data-aos="fade-up">Client A</div>
-          <div className="w-40 h-20 bg-[#D8B4FE] text-[#121212] flex items-center justify-center rounded" data-aos="fade-up">Client B</div>
-          <div className="w-40 h-20 bg-[#D8B4FE] text-[#121212] flex items-center justify-center rounded" data-aos="fade-up">Client C</div>
+        <h2 className="text-3xl font-bold text-[#fffffe] text-center mb-10">Featured Clients</h2>
+        <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          {/* Card 1 */}
+          <div
+            className="bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg flex flex-col items-center justify-center transition-all duration-300 relative group hover:shadow-[0_0_30px_5px_#FFD600] hover:border-[#FFD600] hover:text-[#FFD600]"
+            data-aos="fade-up"
+          >
+            <span className="text-3xl mb-2">🏢</span>
+            <h3 className="text-xl font-bold text-[#FFD600] mb-2 group-hover:text-[#FFD600]">Client A</h3>
+          </div>
+          {/* Card 2 */}
+          <div
+            className="bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg flex flex-col items-center justify-center transition-all duration-300 relative group hover:shadow-[0_0_30px_5px_#FFD600] hover:border-[#FFD600] hover:text-[#FFD600]"
+            data-aos="fade-up"
+          >
+            <span className="text-3xl mb-2">🏬</span>
+            <h3 className="text-xl font-bold text-[#FFD600] mb-2 group-hover:text-[#FFD600]">Client B</h3>
+          </div>
+          {/* Card 3 */}
+          <div
+            className="bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg flex flex-col items-center justify-center transition-all duration-300 relative group hover:shadow-[0_0_30px_5px_#FFD600] hover:border-[#FFD600] hover:text-[#FFD600]"
+            data-aos="fade-up"
+          >
+            <span className="text-3xl mb-2">🏦</span>
+            <h3 className="text-xl font-bold text-[#FFD600] mb-2 group-hover:text-[#FFD600]">Client C</h3>
+          </div>
         </div>
       </section>
 
-      {/* Why Choose Us */}
+      {/* Why Choose Us - Updated Cards */}
       <section className="py-20 px-4">
-        <h2 className="text-3xl font-bold text-[#D8B4FE] text-center mb-10">Why Choose Us</h2>
+        <h2 className="text-3xl font-bold text-[#fffffe] text-center mb-10">Why Choose Us</h2>
         <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-          <div className="text-center" data-aos="fade-up">
-            <h3 className="text-4xl text-[#D8B4FE] font-bold">10+</h3>
-            <p className="text-[#5A6F73]">Years of Experience</p>
+          {/* Card 1 */}
+          <div
+            className="bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg transition-all duration-300 relative hover:shadow-[0_0_30px_5px_#FFD600] hover:border-[#FFD600] group text-center"
+            data-aos="fade-up"
+          >
+            <div className="flex justify-center mb-4">
+              <span className="text-3xl">⏳</span>
+            </div>
+            <h3 className="text-2xl font-bold text-[#FFD600] mb-2 group-hover:text-[#FFD600]">10+</h3>
+            <p className="mb-4">Years of Experience</p>
+            <a href="#" className="text-[#FFD600] underline font-semibold">Read More</a>
           </div>
-          <div className="text-center" data-aos="fade-up">
-            <h3 className="text-4xl text-[#D8B4FE] font-bold">200+</h3>
-            <p className="text-[#5A6F73]">Projects Delivered</p>
+          {/* Card 2 */}
+          <div
+            className="bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg transition-all duration-300 relative hover:shadow-[0_0_30px_5px_#FFD600] hover:border-[#FFD600] group text-center"
+            data-aos="fade-up"
+          >
+            <div className="flex justify-center mb-4">
+              <span className="text-3xl">📦</span>
+            </div>
+            <h3 className="text-2xl font-bold text-[#FFD600] mb-2 group-hover:text-[#FFD600]">200+</h3>
+            <p className="mb-4">Projects Delivered</p>
+            <a href="#" className="text-[#FFD600] underline font-semibold">Read More</a>
           </div>
-          <div className="text-center" data-aos="fade-up">
-            <h3 className="text-4xl text-[#D8B4FE] font-bold">50+</h3>
-            <p className="text-[#5A6F73]">Expert Team Members</p>
+          {/* Card 3 */}
+          <div
+            className="bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg transition-all duration-300 relative hover:shadow-[0_0_30px_5px_#FFD600] hover:border-[#FFD600] group text-center"
+            data-aos="fade-up"
+          >
+            <div className="flex justify-center mb-4">
+              <span className="text-3xl">👥</span>
+            </div>
+            <h3 className="text-2xl font-bold text-[#FFD600] mb-2 group-hover:text-[#FFD600]">50+</h3>
+            <p className="mb-4">Expert Team Members</p>
+            <a href="#" className="text-[#FFD600] underline font-semibold">Read More</a>
           </div>
-          <div className="text-center" data-aos="fade-up">
-            <h3 className="text-4xl text-[#D8B4FE] font-bold">98%</h3>
-            <p className="text-[#5A6F73]">Client Satisfaction</p>
+          {/* Card 4 */}
+          <div
+            className="bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg transition-all duration-300 relative hover:shadow-[0_0_30px_5px_#FFD600] hover:border-[#FFD600] group text-center"
+            data-aos="fade-up"
+          >
+            <div className="flex justify-center mb-4">
+              <span className="text-3xl">⭐</span>
+            </div>
+            <h3 className="text-2xl font-bold text-[#FFD600] mb-2 group-hover:text-[#FFD600]">98%</h3>
+            <p className="mb-4">Client Satisfaction</p>
+            <a href="#" className="text-[#FFD600] underline font-semibold">Read More</a>
           </div>
         </div>
       </section>
 
-      {/* Services */}
+      {/* Our Services - Updated Cards */}
       <section className="py-20 text-white">
-        <h2 className="text-3xl font-bold text-[#D8B4FE] text-center mb-10">Our Services</h2>
+        <h2 className="text-3xl font-bold text-[#fffffe] text-center mb-10">Our Services</h2>
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {/* Card 1 */}
           <div
-            className="p-6 border border-[#D8B4FE] rounded hover:bg-[#D8B4FE] hover:text-[#121212] transition"
+            className="bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg transition-all duration-300 relative hover:shadow-[0_0_30px_5px_#FFD600] hover:border-[#FFD600] group"
             data-aos="fade-up"
           >
-            <h3 className="text-xl font-bold mb-2">Web Development</h3>
-            <p>High-quality websites that scale with your business needs.</p>
+            <div className="flex justify-center mb-4">
+              <span className="text-3xl">🎯</span>
+            </div>
+            <h3 className="text-2xl font-bold text-[#FFD600] mb-2 group-hover:text-[#FFD600]">Web Development</h3>
+            <p className="mb-4">High-quality websites that scale with your business needs.</p>
+            <a href="#" className="text-[#FFD600] underline font-semibold">Read More</a>
           </div>
+          {/* Card 2 */}
           <div
-            className="p-6 border border-[#D8B4FE] rounded hover:bg-[#D8B4FE] hover:text-[#121212] transition"
+            className="bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg transition-all duration-300 relative hover:shadow-[0_0_30px_5px_#FFD600] hover:border-[#FFD600] group"
             data-aos="fade-up"
           >
-            <h3 className="text-xl font-bold mb-2">Mobile Apps</h3>
-            <p>Seamless mobile applications for iOS and Android platforms.</p>
+            <div className="flex justify-center mb-4">
+              <span className="text-3xl">📱</span>
+            </div>
+            <h3 className="text-2xl font-bold text-[#FFD600] mb-2 group-hover:text-[#FFD600]">Mobile Apps</h3>
+            <p className="mb-4">Seamless mobile applications for iOS and Android platforms.</p>
+            <a href="#" className="text-[#FFD600] underline font-semibold">Read More</a>
           </div>
+          {/* Card 3 */}
           <div
-            className="p-6 border border-[#D8B4FE] rounded hover:bg-[#D8B4FE] hover:text-[#121212] transition"
+            className="bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg transition-all duration-300 relative hover:shadow-[0_0_30px_5px_#FFD600] hover:border-[#FFD600] group"
             data-aos="fade-up"
           >
-            <h3 className="text-xl font-bold mb-2">UI/UX Design</h3>
-            <p>Engaging designs focused on user experience and results.</p>
+            <div className="flex justify-center mb-4">
+              <span className="text-3xl">🎨</span>
+            </div>
+            <h3 className="text-2xl font-bold text-[#FFD600] mb-2 group-hover:text-[#FFD600]">UI/UX Design</h3>
+            <p className="mb-4">Engaging designs focused on user experience and results.</p>
+            <a href="#" className="text-[#FFD600] underline font-semibold">Read More</a>
           </div>
         </div>
       </section>
 
       {/* Clients */}
       <section className="py-20 px-4">
-        <h2 className="text-3xl font-bold text-[#D8B4FE] text-center mb-10">Our Clients</h2>
-        <div className="flex flex-wrap justify-center gap-6">
-          <div className="w-28 h-28 bg-[#D8B4FE] text-[#121212] flex items-center justify-center rounded-full" data-aos="fade-up">
-            Logo 1
+        <h2 className="text-3xl font-bold text-[#fffffe] text-center mb-10">Our Clients</h2>
+        <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          {/* Card 1 */}
+          <div
+            className="bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg flex flex-col items-center justify-center transition-all duration-300 relative group hover:shadow-[0_0_30px_5px_#FFD600] hover:border-[#FFD600] hover:text-[#FFD600]"
+            data-aos="fade-up"
+          >
+            <span className="text-3xl mb-2">🅰️</span>
+            <h3 className="text-xl font-bold text-[#FFD600] mb-2 group-hover:text-[#FFD600]">Logo 1</h3>
           </div>
-          <div className="w-28 h-28 bg-[#D8B4FE] text-[#121212] flex items-center justify-center rounded-full" data-aos="fade-up">
-            Logo 2
+          {/* Card 2 */}
+          <div
+            className="bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg flex flex-col items-center justify-center transition-all duration-300 relative group hover:shadow-[0_0_30px_5px_#FFD600] hover:border-[#FFD600] hover:text-[#FFD600]"
+            data-aos="fade-up"
+          >
+            <span className="text-3xl mb-2">🅱️</span>
+            <h3 className="text-xl font-bold text-[#FFD600] mb-2 group-hover:text-[#FFD600]">Logo 2</h3>
           </div>
-          <div className="w-28 h-28 bg-[#D8B4FE] text-[#121212] flex items-center justify-center rounded-full" data-aos="fade-up">
-            Logo 3
+          {/* Card 3 */}
+          <div
+            className="bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg flex flex-col items-center justify-center transition-all duration-300 relative group hover:shadow-[0_0_30px_5px_#FFD600] hover:border-[#FFD600] hover:text-[#FFD600]"
+            data-aos="fade-up"
+          >
+            <span className="text-3xl mb-2">🅾️</span>
+            <h3 className="text-xl font-bold text-[#FFD600] mb-2 group-hover:text-[#FFD600]">Logo 3</h3>
           </div>
-          <div className="w-28 h-28 bg-[#D8B4FE] text-[#121212] flex items-center justify-center rounded-full" data-aos="fade-up">
-            Logo 4
+          {/* Card 4 */}
+          <div
+            className="bg-[#181818] p-8 border-2 border-[#FFD600] rounded-xl shadow-lg flex flex-col items-center justify-center transition-all duration-300 relative group hover:shadow-[0_0_30px_5px_#FFD600] hover:border-[#FFD600] hover:text-[#FFD600]"
+            data-aos="fade-up"
+          >
+            <span className="text-3xl mb-2">🆎</span>
+            <h3 className="text-xl font-bold text-[#FFD600] mb-2 group-hover:text-[#FFD600]">Logo 4</h3>
           </div>
         </div>
       </section>

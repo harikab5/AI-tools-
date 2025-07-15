@@ -190,33 +190,33 @@ const AboutUs = () => {
 
       {/* Our CEO and Company Heads */}
       <section className="py-16 px-4">
-        <h2 className="text-3xl font-bold text-[#D8B4FE] text-center mb-8">
+        <h2 className="text-3xl font-bold text-[#ffffff] text-center mb-8">
           Our CEO and Company Heads
         </h2>
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <div className="text-center" data-aos="fade-up">
-            <div className="w-32 h-32 rounded-full mx-auto bg-[#D8B4FE] text-[#121212] flex items-center justify-center text-2xl font-bold">
+            <div className="w-32 h-32 rounded-full mx-auto bg-[#5A6F73] text-[#121212] flex items-center justify-center text-2xl font-bold">
               J.S.
             </div>
-            <h3 className="mt-4 text-xl text-[#D8B4FE] font-bold">
+            <h3 className="mt-4 text-xl text-[#ffffff] font-bold">
               Jane Smith
             </h3>
             <p className="text-[#5A6F73]">Chief Executive Officer</p>
           </div>
           <div className="text-center" data-aos="fade-up">
-            <div className="w-32 h-32 rounded-full mx-auto bg-[#D8B4FE] text-[#121212] flex items-center justify-center text-2xl font-bold">
+            <div className="w-32 h-32 rounded-full mx-auto bg-[#5A6F73] text-[#121212] flex items-center justify-center text-2xl font-bold">
               M.K.
             </div>
-            <h3 className="mt-4 text-xl text-[#D8B4FE] font-bold">
+            <h3 className="mt-4 text-xl text-[#ffffff] font-bold">
               Mark Kumar
             </h3>
             <p className="text-[#5A6F73]">Head of Technology</p>
           </div>
           <div className="text-center" data-aos="fade-up">
-            <div className="w-32 h-32 rounded-full mx-auto bg-[#D8B4FE] text-[#121212] flex items-center justify-center text-2xl font-bold">
+            <div className="w-32 h-32 rounded-full mx-auto bg-[#5A6F73] text-[#121212] flex items-center justify-center text-2xl font-bold">
               L.W.
             </div>
-            <h3 className="mt-4 text-xl text-[#D8B4FE] font-bold">
+            <h3 className="mt-4 text-xl text-[#ffffff] font-bold">
               Laura White
             </h3>
             <p className="text-[#5A6F73]">Head of Design</p>
