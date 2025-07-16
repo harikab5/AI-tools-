@@ -40,3 +40,10 @@
 .read-the-docs {
   color: #888;
 }
+
+.bg-brand { background-color: #1a202c; }
+.bg-section1 { background-color: #f7fafc; }
+.bg-section2 { background-color: #edf2f7; }
+.bg-section3 { background-color: #e2e8f0; }
+.bg-section4 { background-color: #cbd5e1; }
+.text-brand { color: #1a202c; }

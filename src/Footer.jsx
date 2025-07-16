@@ -12,15 +12,16 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#232335] text-white py-12 px-8 mt-12">
+    <footer className="bg-section-grey text-white py-8 px-4 text-center">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
         {/* Logo & Social Media */}
-        <div className="flex flex-col gap-4 items-start">
+        <div className="flex flex-col gap-4 items-center">
           <img src={logo} alt="Logo" className="h-14 w-14" />
-          <p className="text-[#ccc] text-sm leading-relaxed">
-            Leading the future with cutting-edge AI tools and solutions for every business.
+          <p className="text-gray-400 text-sm leading-relaxed">
+            Leading the future with cutting-edge AI tools and solutions for every
+            business.
           </p>
-          <div className="flex gap-3 mt-4">
+          <div className="flex gap-3 mt-4 justify-center">
             {[
               { icon: FaLinkedin, url: "https://www.linkedin.com" },
               { icon: FaTwitter, url: "https://twitter.com" },
@@ -32,9 +33,9 @@ export default function Footer() {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full flex items-center justify-center bg-[#333] hover:bg-yellow-400 transition-all"
+                className="w-9 h-9 rounded-full flex items-center justify-center bg-gradient-to-tr from-gray-700 to-gray-900 hover:from-yellow-400 hover:to-yellow-300 transition-all"
               >
-                <social.icon className="text-yellow-400 hover:text-[#232335] transition-colors text-lg" />
+                <social.icon className="text-white hover:text-black transition-colors text-lg" />
               </a>
             ))}
           </div>
@@ -56,7 +57,7 @@ export default function Footer() {
               <li key={link.label}>
                 <Link
                   to={link.path}
-                  className="hover:text-yellow-400 font-medium transition-colors"
+                  className="hover:text-yellow-400 font-medium text-gray-300 transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -81,7 +82,7 @@ export default function Footer() {
               "Machine Learning Training",
             ].map((service) => (
               <li key={service}>
-                <span className="font-medium text-[#ccc] hover:text-yellow-400 transition-colors cursor-pointer">
+                <span className="font-medium text-gray-300 hover:text-yellow-400 transition-colors cursor-pointer">
                   {service}
                 </span>
               </li>
@@ -90,9 +91,10 @@ export default function Footer() {
         </div>
 
         {/* Contact Box */}
-        <div className="bg-[#181830] rounded-2xl p-6 flex flex-col gap-4 shadow-lg shadow-[#1e293b]">
-          <p className="font-semibold text-lg mb-2 leading-relaxed text-[#ddd]">
-            Ready to revolutionize your business with AI? <br />
+        <div className="bg-gradient-to-tr from-gray-800 to-gray-900 rounded-2xl p-6 flex flex-col gap-4 shadow-lg shadow-gray-800">
+          <p className="font-semibold text-lg mb-2 leading-relaxed text-gray-100">
+            Ready to revolutionize your business with AI?
+            <br />
             Our AI experts are here to help you innovate and automate.
           </p>
           <div className="flex items-center gap-3 text-yellow-400">
@@ -104,15 +106,17 @@ export default function Footer() {
             <span className="text-white text-sm">ai@tools.in</span>
           </div>
           <button
-            className="mt-4 w-full text-center px-6 py-3 rounded-full bg-gradient-to-r from-cyan-400 to-yellow-400 text-[#232335] font-bold hover:scale-105 transition-all"
+            className="mt-4 w-full text-center px-6 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-300 text-black font-bold hover:scale-105 transition-all"
             style={{ boxShadow: "0 0 16px 0 #facc15" }}
           >
             Get your AI solution now
           </button>
         </div>
       </div>
-      <div className="mt-12 border-t border-[#333] pt-4 text-center text-xs text-[#888]">
-        © {new Date().getFullYear()} ESS AI Tools. All rights reserved.
+
+      {/* Footer Bottom */}
+      <div className="mt-12 border-t border-gray-700 pt-4 text-center text-xs text-gray-500">
+        © {new Date().getFullYear()} Your Company. All rights reserved.
       </div>
     </footer>
   );
