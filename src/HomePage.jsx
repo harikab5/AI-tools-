@@ -7,7 +7,6 @@ import reactLogo from './assets/tech/react.png';
 import vueLogo from './assets/tech/vue.png';
 import flutterLogo from './assets/tech/flutter.png';
 import awsLogo from './assets/tech/aws.png';
-import postgresqlLogo from './assets/tech/postgresql.png';
 import hero from './assets/hero.png';
 import heroVideo from './assets/hero.mp4';
 import agentImg from './assets/agent.png';
@@ -90,15 +89,36 @@ const insightCards = [
     desc: 'Unlock hidden growth potential using predictive AI models.',
     back: 'Discover new markets and optimize your strategy for maximum business growth.',
   },
+  {
+    title: 'Competitive Analysis',
+    desc: 'Benchmark your business against industry leaders.',
+    back: 'Leverage AI to monitor competitors and identify your unique advantages.',
+  },
+  {
+    title: 'Operational Efficiency',
+    desc: 'Streamline processes and reduce costs with automation.',
+    back: 'AI-driven insights help you optimize workflows and resource allocation.',
+  },
 ];
 
 const insightGradients = [
   "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
   "linear-gradient(135deg, #fbc2eb 0%, #fbc2eb 50%, #f9d423 100%)",
-  "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
+  "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+  // Add more gradients if you want to use them for new cards
+  "linear-gradient(135deg, #f7971e 0%, #ffd200 100%)",
+  "linear-gradient(135deg, #f857a6 0%, #ff5858 100%)",
+  "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
 ];
-const insightIcons = [<FaGlobe />, <FaGem />, <FaRocket />];
-const insightImages = [card7Img, card8Img, card9Img]; // your background images
+
+const insightIcons = [
+  <FaGlobe />, 
+  <FaGem />, 
+  <FaRocket />,
+  <FaChartLine />,
+  <FaCogs />
+];
+const insightImages = [card7Img, card8Img, card9Img, card2Img, card3Img];
 
 export default function HomePage() {
   const [flippedService, setFlippedService] = useState(null);
@@ -130,16 +150,22 @@ export default function HomePage() {
           <h1 className="text-6xl md:text-7xl font-extrabold text-gold mb-8 leading-tight tracking-tight">
             Empowering Businesses with <br className="hidden md:block" /> End-to-End AI Intelligence
           </h1>
+          <h2 className="text-2xl md:text-3xl text-yellow-400 mb-4 font-semibold tracking-wide">
+            Unlock the Power of Automation, Analytics, and Personalization
+          </h2>
           <p className="text-2xl md:text-3xl text-gray-300 mb-6 font-medium">
             Build, deploy, and scale AI-driven solutions tailored to your business needs.
           </p>
           <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
             Transform your operations with automation, predictive analytics, and scalable systems — all powered by next-gen artificial intelligence.
           </p>
-          <div className="flex flex-col md:flex-row gap-6 justify-center">
-            <Button className="bg-gold text-black text-xl font-bold hover:bg-yellow-300 px-8 py-4 rounded-full shadow-lg">Get Started</Button>
-            <Button className="bg-gold text-black text-xl font-bold hover:bg-yellow-300 px-8 py-4 rounded-full shadow-lg">Explore Tools</Button>
-          </div>
+          <ul className="flex flex-col md:flex-row gap-6 justify-center text-lg text-gray-200 mb-8">
+            <li className="flex items-center gap-2"><FaCogs className="text-yellow-400" /> Intelligent Automation</li>
+            <li className="flex items-center gap-2"><FaChartLine className="text-yellow-400" /> Real-Time Analytics</li>
+            <li className="flex items-center gap-2"><FaBrain className="text-yellow-400" /> Custom AI Solutions</li>
+            <li className="flex items-center gap-2"><FaShieldAlt className="text-yellow-400" /> Enterprise-Grade Security</li>
+          </ul>
+          <Button className="bg-gradient-to-r from-gray-700 to-gray-900 text-white text-xl font-bold hover:from-gray-600 hover:to-gray-800 px-8 py-4 rounded-full shadow-lg">Explore Tools</Button>
           <p className="mt-12 text-md text-gray-200 italic">
             Trusted by startups, enterprises, and innovators to shape the future of intelligent solutions.
           </p>
@@ -207,22 +233,34 @@ export default function HomePage() {
         <h2 className="text-3xl font-semibold mb-10 text-gold">Insights</h2>
         <div className="flex flex-wrap justify-center gap-8">
           {insightCards.map((card, i) => (
-            <div key={card.title} className="insight-curve-card">
-              {/* Background image */}
-              <div className="insight-curve-bg" style={{
-                backgroundImage: `url(${insightImages[i]})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center"
-              }}>
-                {/* Gradient overlay */}
-                <div className="insight-curve-gradient" style={{ background: insightGradients[i] }} />
-              </div>
-              {/* Icon cutout */}
-              <div className="insight-curve-icon">{insightIcons[i]}</div>
-              {/* Content */}
-              <div className="insight-curve-content">
-                <div className="insight-curve-title">{card.title}</div>
-                <div className="text-sm">{card.desc}</div>
+            <div
+              key={card.title}
+              className={`insight-flip-card group ${flippedInsight === i ? 'flipped' : ''}`}
+              onMouseEnter={() => setFlippedInsight(i)}
+              onMouseLeave={() => setFlippedInsight(null)}
+            >
+              <div className="insight-flip-inner">
+                {/* Front Side */}
+                <div
+                  className="insight-flip-front"
+                  style={{
+                    backgroundImage: `url(${insightImages[i]})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center"
+                  }}
+                >
+                  <div className="overlay"></div>
+                  <div className="content flex flex-col items-center justify-center w-full h-full">
+                    <div className="icon">{insightIcons[i]}</div>
+                    <div className="title">{card.title}</div>
+                    <div className="text-sm">{card.desc}</div>
+                  </div>
+                </div>
+                {/* Back Side */}
+                <div className="insight-flip-back flex flex-col items-center justify-center p-6">
+                  <div className="title">{card.title}</div>
+                  <div className="text-sm">{card.back}</div>
+                </div>
               </div>
             </div>
           ))}
@@ -234,14 +272,15 @@ export default function HomePage() {
         <h2 className="text-4xl font-bold mb-10 text-gold">Tech We Use</h2>
         <div className="relative overflow-hidden">
           <div className="marquee flex gap-16 w-max px-8 animate-scroll">
-            {[pythonLogo, djangoLogo, reactLogo, vueLogo, flutterLogo, awsLogo, postgresqlLogo,
-              pythonLogo, djangoLogo, reactLogo, vueLogo, flutterLogo, awsLogo, postgresqlLogo].map((logo, index) => (
-              <img
-                key={index}
-                src={logo}
-                alt={`Tech ${index}`}
-                className="h-24 w-auto hover:scale-110 transition-all duration-300 drop-shadow-xl cursor-pointer"
-              />
+            {[pythonLogo, djangoLogo, reactLogo, vueLogo, flutterLogo, awsLogo,
+              pythonLogo, djangoLogo, reactLogo, vueLogo, flutterLogo, awsLogo].map((logo, index) => (
+              <div key={index} className="tech-logo-wrapper">
+                <img
+                  src={logo}
+                  alt={`Tech ${index}`}
+                  className="tech-logo-img"
+                />
+              </div>
             ))}
           </div>
         </div>

@@ -19,7 +19,7 @@ export default function Header({ darkMode, setDarkMode }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="bg-[#181818] w-full flex items-center justify-between px-12 py-6 shadow-lg relative" style={{ minHeight: "250px" }}>
+    <header className="bg-[#181818] w-full flex items-center justify-between px-12 py-6 shadow-lg sticky top-0 z-50" style={{ minHeight: "250px" }}>
       {/* Logo */}
       <div className="flex items-center gap-6">
         <img src={logo} alt="Logo" className="h-[200px] w-[230px] object-contain" />
