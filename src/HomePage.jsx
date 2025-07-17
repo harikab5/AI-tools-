@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from './components/Button';
-import { FaCogs, FaChartLine, FaMobileAlt, FaRobot, FaShieldAlt, FaBrain } from 'react-icons/fa';
+import { FaCogs, FaChartLine, FaMobileAlt, FaRobot, FaShieldAlt, FaBrain, FaArrowRight, FaGlobe, FaGem, FaRocket } from 'react-icons/fa';
 import pythonLogo from './assets/tech/python.png';
 import djangoLogo from './assets/tech/django.png';
 import reactLogo from './assets/tech/react.png';
@@ -9,6 +9,7 @@ import flutterLogo from './assets/tech/flutter.png';
 import awsLogo from './assets/tech/aws.png';
 import postgresqlLogo from './assets/tech/postgresql.png';
 import hero from './assets/hero.png';
+import heroVideo from './assets/hero.mp4';
 import agentImg from './assets/agent.png';
 import card2Img from './assets/card2.jpeg';
 import card3Img from './assets/card3.jpeg';
@@ -30,36 +31,46 @@ const serviceCards = [
     title: 'Agentic AI Integration',
     desc: 'Full automation system that thinks & acts.',
     back: 'Integrate advanced agentic AI for seamless business automation and decision making.',
+    image: agentImg,
+    gradient: 'from-gray-600 to-gray-800'
   },
   {
-    icon: <FaMobileAlt />,
     title: 'App & Software Development',
     desc: 'Custom web and mobile solutions.',
     back: 'We build scalable, secure apps tailored for your business needs using modern tech.',
+    image: card2Img,
+    gradient: 'from-gray-600 to-gray-800'
   },
   {
-    icon: <FaChartLine />,
     title: 'Analytics & BI',
     desc: 'Real‑time metrics and dashboards.',
     back: 'Unlock actionable insights with real-time dashboards and predictive analytics.',
+    image: card3Img,
+    gradient: 'from-gray-600 to-gray-800'
   },
   {
     icon: <FaRobot />,
     title: 'Chatbots & Automation',
     desc: 'Automate repetitive tasks with AI.',
     back: 'Reduce operational load with smart chatbots and automation tools.',
+    image: card4Img,
+    gradient: 'from-gray-600 to-gray-800'
   },
   {
     icon: <FaShieldAlt />,
     title: 'AI Security Solutions',
     desc: 'Intelligent threat detection systems.',
     back: 'We design AI-powered solutions for cybersecurity and risk mitigation.',
+    image: card5Img,
+    gradient: 'from-gray-600 to-gray-800'
   },
   {
     icon: <FaBrain />,
     title: 'Machine Learning Models',
     desc: 'Custom ML for your business.',
     back: 'Train models tailored to your goals—classification, regression, NLP, and more.',
+    image: card6Img,
+    gradient: 'from-gray-600 to-gray-800'
   },
 ];
 
@@ -81,6 +92,14 @@ const insightCards = [
   },
 ];
 
+const insightGradients = [
+  "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
+  "linear-gradient(135deg, #fbc2eb 0%, #fbc2eb 50%, #f9d423 100%)",
+  "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
+];
+const insightIcons = [<FaGlobe />, <FaGem />, <FaRocket />];
+const insightImages = [card7Img, card8Img, card9Img]; // your background images
+
 export default function HomePage() {
   const [flippedService, setFlippedService] = useState(null);
   const [flippedInsight, setFlippedInsight] = useState(null);
@@ -89,12 +108,25 @@ export default function HomePage() {
     <div className="space-y-16 bg-black text-white">
       
       {/* 🏠 Hero Section */}
-      <section
-        className="relative text-white py-32 text-center shadow-2xl bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${hero})` }}
-      >
+      <section className="relative text-white py-32 text-center shadow-2xl overflow-hidden">
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src={heroVideo} type="video/mp4" />
+          {/* Fallback background image */}
+          <img src={hero} alt="Hero Background" className="w-full h-full object-cover" />
+        </video>
+        
+        {/* Overlay */}
         <div className="bg-black bg-opacity-60 absolute inset-0"></div>
-        <div className="relative max-w-7xl mx-auto px-6">
+        
+        {/* Content */}
+        <div className="relative max-w-7xl mx-auto px-6 z-10">
           <h1 className="text-6xl md:text-7xl font-extrabold text-gold mb-8 leading-tight tracking-tight">
             Empowering Businesses with <br className="hidden md:block" /> End-to-End AI Intelligence
           </h1>
@@ -117,78 +149,52 @@ export default function HomePage() {
       {/* 💡 Our Core Services */}
       <section className="bg-section-grey py-16 px-6 text-center">
         <h2 className="text-4xl font-semibold mb-12 text-gold">Our Core Services</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-1 gap-y-2 justify-items-center">
           {serviceCards.map((card, i) => (
             <div
               key={card.title}
-              className={`flip-card ${flippedService === i ? 'flipped' : ''} w-full max-w-[500px]`}
+              className={`flip-card group ${flippedService === i ? 'flipped' : ''} w-full max-w-[700px] h-[500px] flex flex-col relative overflow-hidden`}
               onMouseEnter={() => setFlippedService(i)}
               onMouseLeave={() => setFlippedService(null)}
             >
-              <div className="flip-card-inner">
-                <div
-                  className="flip-card-front bg-gradient-to-br from-gray-900 via-black to-gray-800 rounded-xl shadow-xl border-2 border-gold text-white p-6 flex flex-col items-center justify-center h-full"
-                  style={
-                    i === 0
-                      ? {
-                          backgroundImage: `url(${agentImg})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          backgroundRepeat: 'no-repeat',
-                        }
-                      : i === 1
-                      ? {
-                          backgroundImage: `url(${card2Img})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          backgroundRepeat: 'no-repeat',
-                        }
-                      : i === 2
-                      ? {
-                          backgroundImage: `url(${card3Img})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          backgroundRepeat: 'no-repeat',
-                        }
-                      : i === 3
-                      ? {
-                          backgroundImage: `url(${card4Img})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          backgroundRepeat: 'no-repeat',
-                        }
-                      : i === 4
-                      ? {
-                          backgroundImage: `url(${card5Img})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          backgroundRepeat: 'no-repeat',
-                        }
-                      : i === 5
-                      ? {
-                          backgroundImage: `url(${card6Img})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          backgroundRepeat: 'no-repeat',
-                        }
-                      : {}
-                  }
-                >
-                  <div className="text-gold text-5xl mb-4">
-                    {i === 0 ? <FaCogs /> :
-                     i === 1 ? <FaMobileAlt /> :
-                     i === 2 ? <FaChartLine /> :
-                     i === 3 ? <FaRobot /> :
-                     i === 4 ? <FaShieldAlt /> :
-                     i === 5 ? <FaBrain /> :
-                     card.icon}
+              <div className="flip-card-inner h-full">
+                <div className={`flip-card-front bg-gradient-to-b ${card.gradient} rounded-xl shadow-lg overflow-hidden h-full flex flex-col relative`}>
+                  {/* Hologram Effect Overlay for Card */}
+                  <div className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                       style={{
+                         background: "linear-gradient(120deg, rgba(0,255,255,0.12) 0%, rgba(0,0,0,0) 60%, rgba(0,255,255,0.12) 100%)"
+                       }} />
+                  {/* Image Section */}
+                  <div className="flex-1 w-full relative">
+                    <img 
+                      src={card.image} 
+                      alt={card.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <h3 className="text-2xl font-bold text-gold">{card.title}</h3>
-                  <p className="mt-2 text-gray-300">{card.desc}</p>
+                  {/* Text Area */}
+                  <div className="p-6 min-h-[60px] flex flex-col justify-center relative group/text hover:z-20">
+                    {/* Hologram Effect Overlay for Text */}
+                    <div className="pointer-events-none absolute inset-0 z-10 opacity-0 group-hover:text:opacity-100 hover:opacity-100 transition-opacity duration-500"
+                         style={{
+                           background: "linear-gradient(90deg, rgba(0,255,255,0.18) 0%, rgba(0,0,0,0) 60%, rgba(0,255,255,0.18) 100%)"
+                         }} />
+                    <h3 className="text-white text-lg font-bold mb-1 group-hover:glitter-text transition-all duration-300">{card.title}</h3>
+                    <p className="text-white text-sm leading-relaxed group-hover:glitter-text transition-all duration-300">
+                      {card.desc}
+                    </p>
+                  </div>
                 </div>
-                <div className="flip-card-back bg-gold rounded-xl shadow-xl border-2 border-white text-black p-6 flex flex-col items-center justify-center h-full">
-                  <h3 className="text-xl font-bold mb-2">{card.title}</h3>
-                  <p>{card.back}</p>
+                
+                {/* Back Side */}
+                <div className="flip-card-back bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl shadow-xl border-2 border-blue-400 text-white p-6 flex flex-col items-center justify-center h-full relative group">
+                  {/* Hologram Effect on Back */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                  
+                  <div className="relative z-10 text-center">
+                    <h3 className="text-xl font-bold mb-4 text-blue-200">{card.title}</h3>
+                    <p className="text-gray-200 leading-relaxed">{card.back}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -199,50 +205,24 @@ export default function HomePage() {
       {/* 🚀 Insights */}
       <section className="bg-section-grey py-16 px-8 text-center">
         <h2 className="text-3xl font-semibold mb-10 text-gold">Insights</h2>
-        <div className="grid md:grid-cols-3 gap-8 justify-center">
+        <div className="flex flex-wrap justify-center gap-8">
           {insightCards.map((card, i) => (
-            <div
-              key={card.title}
-              className={`flip-card ${flippedInsight === i ? 'flipped' : ''} mx-auto`}
-              onMouseEnter={() => setFlippedInsight(i)}
-              onMouseLeave={() => setFlippedInsight(null)}
-            >
-              <div className="flip-card-inner">
-                <div
-                  className="flip-card-front bg-gradient-to-br from-gray-900 via-black to-gray-800 rounded-lg shadow-xl border-2 border-gold text-white p-8 flex flex-col items-center justify-center"
-                  style={
-                    i === 0
-                      ? {
-                          backgroundImage: `url(${card7Img})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          backgroundRepeat: 'no-repeat',
-                        }
-                      : i === 1
-                      ? {
-                          backgroundImage: `url(${card8Img})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          backgroundRepeat: 'no-repeat',
-                        }
-                      : i === 2
-                      ? {
-                          backgroundImage: `url(${card9Img})`,
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          backgroundRepeat: 'no-repeat',
-                        }
-                      : {}
-                  }
-                >
-                  <div className="text-gold text-4xl mb-4">{card.icon}</div>
-                  <h3 className="text-xl font-bold text-gold">{card.title}</h3>
-                  <p className="mt-2 text-gray-300">{card.desc}</p>
-                </div>
-                <div className="flip-card-back bg-gold rounded-lg shadow-xl border-2 border-white text-black p-8 flex flex-col items-center justify-center">
-                  <h3 className="text-xl font-bold mb-2">{card.title}</h3>
-                  <p>{card.back}</p>
-                </div>
+            <div key={card.title} className="insight-curve-card">
+              {/* Background image */}
+              <div className="insight-curve-bg" style={{
+                backgroundImage: `url(${insightImages[i]})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center"
+              }}>
+                {/* Gradient overlay */}
+                <div className="insight-curve-gradient" style={{ background: insightGradients[i] }} />
+              </div>
+              {/* Icon cutout */}
+              <div className="insight-curve-icon">{insightIcons[i]}</div>
+              {/* Content */}
+              <div className="insight-curve-content">
+                <div className="insight-curve-title">{card.title}</div>
+                <div className="text-sm">{card.desc}</div>
               </div>
             </div>
           ))}

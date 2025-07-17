@@ -7,19 +7,19 @@ import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid";
 
 const servicesDropdown = [
-  { name: "Cloud Integration", path: "/cloud-integration" },
-  { name: "Data Analytics", path: "/data-analytics" },
-  { name: "AI Solutions", path: "/ai-solutions" },
-  { name: "Automation Tools", path: "/automation-tools" },
-  { name: "Customer Support", path: "/customer-support" },
-  { name: "Security & Compliance", path: "/security-compliance" },
+  { name: "AI Chatbots & Assistants", path: "/services/ai-chatbots" },
+  { name: "Content & Code Generation", path: "/services/content-generation" },
+  { name: "Data Analysis & Forecasting", path: "/services/data-analysis" },
+  { name: "NLP & Language Intelligence", path: "/services/nlp-intelligence" },
+  { name: "Computer Vision Solutions", path: "/services/computer-vision" },
+  { name: "Automation & Workflow Tools", path: "/services/automation-tools" },
 ];
 
 export default function Header({ darkMode, setDarkMode }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="bg-[#181818] w-full flex items-center justify-between px-12 py-6 shadow-lg relative" style={{ minHeight: "300px" }}>
+    <header className="bg-[#181818] w-full flex items-center justify-between px-12 py-6 shadow-lg relative" style={{ minHeight: "250px" }}>
       {/* Logo */}
       <div className="flex items-center gap-6">
         <img src={logo} alt="Logo" className="h-[200px] w-[230px] object-contain" />

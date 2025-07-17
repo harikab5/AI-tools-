@@ -6,117 +6,141 @@ import {
   FaTwitter,
   FaFacebook,
   FaInstagram,
+  FaMapMarkerAlt,
+  FaClock,
+  FaArrowRight,
 } from "react-icons/fa";
 import logo from "./assets/logo.png";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="bg-section-grey text-white py-8 px-4 text-center">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-        {/* Logo & Social Media */}
-        <div className="flex flex-col gap-4 items-center">
-          <img src={logo} alt="Logo" className="h-14 w-14" />
-          <p className="text-gray-400 text-sm leading-relaxed">
-            Leading the future with cutting-edge AI tools and solutions for every
-            business.
-          </p>
-          <div className="flex gap-3 mt-4 justify-center">
-            {[
-              { icon: FaLinkedin, url: "https://www.linkedin.com" },
-              { icon: FaTwitter, url: "https://twitter.com" },
-              { icon: FaFacebook, url: "https://facebook.com" },
-              { icon: FaInstagram, url: "https://instagram.com" },
-            ].map((social, i) => (
-              <a
-                key={i}
-                href={social.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full flex items-center justify-center bg-gradient-to-tr from-gray-700 to-gray-900 hover:from-yellow-400 hover:to-yellow-300 transition-all"
-              >
-                <social.icon className="text-white hover:text-black transition-colors text-lg" />
-              </a>
-            ))}
-          </div>
-        </div>
-
-        {/* Quick Links */}
-        <div>
-          <h3 className="text-yellow-400 text-xl font-bold mb-4">
-            AI Quick Links
-          </h3>
-          <ul className="space-y-2">
-            {[
-              { label: "AI Home", path: "/home" },
-              { label: "About AI", path: "/about-us" },
-              { label: "AI Tools", path: "/ai-solutions" },
-              { label: "AI Blog", path: "/blog" },
-              { label: "Contact AI Team", path: "/contact-us" },
-            ].map((link) => (
-              <li key={link.label}>
-                <Link
-                  to={link.path}
-                  className="hover:text-yellow-400 font-medium text-gray-300 transition-colors"
+    <footer className="bg-gradient-to-br from-[#0c0d0c] via-[#1a1a1a] to-[#222] text-white">
+      {/* Main Footer Content */}
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Company Info & Social */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+            <div className="flex flex-col items-center lg:items-start mb-6 gap-2">
+              <img src={logo} alt="Logo" className="h-12 mb-2" />
+              <h3 className="text-2xl font-bold text-[#FFD700]">AI Tools Company</h3>
+            </div>
+            <p className="text-gray-300 text-sm leading-relaxed mb-6 max-w-xs">
+              Leading the future with cutting-edge AI tools and solutions. Transform your business with intelligent automation and insights.
+            </p>
+            <div className="flex gap-4 justify-center lg:justify-start">
+              {[
+                { icon: FaLinkedin, url: "https://www.linkedin.com", label: "LinkedIn" },
+                { icon: FaTwitter, url: "https://twitter.com", label: "Twitter" },
+                { icon: FaFacebook, url: "https://facebook.com", label: "Facebook" },
+                { icon: FaInstagram, url: "https://instagram.com", label: "Instagram" },
+              ].map((social, i) => (
+                <a
+                  key={i}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full flex items-center justify-center bg-[#333] hover:bg-[#FFD700] hover:text-black transition-all duration-300 group"
+                  aria-label={social.label}
                 >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Our Services */}
-        <div>
-          <h3 className="text-yellow-400 text-xl font-bold mb-4">
-            AI Tools & Solutions
-          </h3>
-          <ul className="space-y-2">
-            {[
-              "AI Chatbots",
-              "Predictive Analytics",
-              "Image Recognition",
-              "Natural Language Processing",
-              "Automation Bots",
-              "AI Consulting",
-              "Machine Learning Training",
-            ].map((service) => (
-              <li key={service}>
-                <span className="font-medium text-gray-300 hover:text-yellow-400 transition-colors cursor-pointer">
-                  {service}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Contact Box */}
-        <div className="bg-gradient-to-tr from-gray-800 to-gray-900 rounded-2xl p-6 flex flex-col gap-4 shadow-lg shadow-gray-800">
-          <p className="font-semibold text-lg mb-2 leading-relaxed text-gray-100">
-            Ready to revolutionize your business with AI?
-            <br />
-            Our AI experts are here to help you innovate and automate.
-          </p>
-          <div className="flex items-center gap-3 text-yellow-400">
-            <FaPhoneAlt />
-            <span className="text-white text-sm">+91 9390594407</span>
+                  <social.icon className="text-lg group-hover:scale-110 transition-transform" />
+                </a>
+              ))}
+            </div>
           </div>
-          <div className="flex items-center gap-3 text-yellow-400">
-            <FaEnvelope />
-            <span className="text-white text-sm">ai@tools.in</span>
+
+          {/* Quick Links */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+            <h3 className="text-[#FFD700] text-xl font-bold mb-6 flex items-center justify-center lg:justify-start">
+              Quick Links
+              <FaArrowRight className="ml-2 text-sm" />
+            </h3>
+            <ul className="space-y-3">
+              {[
+                { label: "Home", path: "/" },
+                { label: "About Us", path: "/about-us" },
+                { label: "Services", path: "/services" },
+                { label: "Blog", path: "/blog" },
+                { label: "Contact", path: "/contact-us" },
+              ].map((link) => (
+                <li key={link.label}>
+                  <Link
+                    to={link.path}
+                    className="text-gray-300 hover:text-[#FFD700] transition-colors duration-300 flex items-center group"
+                  >
+                    <span className="w-2 h-2 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-          <button
-            className="mt-4 w-full text-center px-6 py-3 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-300 text-black font-bold hover:scale-105 transition-all"
-            style={{ boxShadow: "0 0 16px 0 #facc15" }}
-          >
-            Get your AI solution now
-          </button>
+
+          {/* Services */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+            <h3 className="text-[#FFD700] text-xl font-bold mb-6">        Our Services</h3>
+            <ul className="space-y-3">
+              {[
+                { name: "AI Chatbots & Assistants", path: "/services/ai-chatbots" },
+                { name: "Content & Code Generation", path: "/services/content-generation" },
+                { name: "Data Analysis & Forecasting", path: "/services/data-analysis" },
+                { name: "NLP & Language Intelligence", path: "/services/nlp-intelligence" },
+                { name: "Computer Vision Solutions", path: "/services/computer-vision" },
+                { name: "Automation & Workflow Tools", path: "/services/automation-tools" },
+              ].map((service) => (
+                <li key={service.name}>
+                  <Link
+                    to={service.path}
+                    className="text-gray-300 hover:text-[#FFD700] transition-colors duration-300 cursor-pointer flex items-center group"
+                  >
+                    <span className="w-2 h-2 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                    {service.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact & CTA */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left justify-between h-full">
+            <h3 className="text-[#FFD700] text-xl font-bold mb-6">Get In Touch</h3>
+            <div className="space-y-4 mb-6 w-full max-w-xs">
+              <div className="flex items-center text-gray-300">
+                <FaPhoneAlt className="text-[#FFD700] mr-3" />
+                <span className="text-sm">+919390594407</span>
+              </div>
+              <div className="flex items-center text-gray-300">
+                <FaEnvelope className="text-[#FFD700] mr-3" />
+                <span className="text-sm">ai@tools.in</span>
+              </div>
+              <div className="flex items-center text-gray-300">
+                <FaMapMarkerAlt className="text-[#FFD700] mr-3" />
+                <span className="text-sm">India</span>
+              </div>
+              <div className="flex items-center text-gray-300">
+                <FaClock className="text-[#FFD700] mr-3" />
+                <span className="text-sm">Mon - Fri: 9am - 6pm</span>
+              </div>
+            </div>
+            <button className="w-full bg-gradient-to-r from-[#FFD700] to-[#FFA500] text-black font-bold py-3 rounded-lg hover:shadow-[0_0_20px_#FFD700] transition-all duration-300 hover:scale-105">
+              Start Your AI Journey
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Footer Bottom */}
-      <div className="mt-12 border-t border-gray-700 pt-4 text-center text-xs text-gray-500">
-        © {new Date().getFullYear()} Your Company. All rights reserved.
+      <div className="border-t border-gray-700 py-6 mt-8">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-400 text-sm mb-0 md:mb-0 text-center md:text-left">
+            © {new Date().getFullYear()} AI Tools Company. All rights reserved.
+          </p>
+          <div className="flex gap-6 text-sm text-gray-400 justify-center md:justify-end">
+            <a href="#" className="hover:text-[#FFD700] transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-[#FFD700] transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-[#FFD700] transition-colors">Cookie Policy</a>
+          </div>
+        </div>
       </div>
     </footer>
   );
